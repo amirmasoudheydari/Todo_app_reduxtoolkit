@@ -61,3 +61,5 @@ export const {
   DELETE_TODO,
   DELETE_ALL_COMPLETE
 } = todosSlice.actions
+
+export const selectTodos = state => state.todos.entities.todos

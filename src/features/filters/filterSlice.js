@@ -1,13 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export const statusType = {
+  ALL: 'All',
+  ACTIVE:'Active',
+  COMPLETED: 'Completed'
+}
+
+
 const initialState = {
   filterStatus: ['All', 'Active', 'Completed'],
   filterColor: ['Green', 'Blue', 'Orange', 'red'],
   entities:{
-    filterStatus: 'All',
+    filterStatus: statusType.ALL,
     filtredColor: {}
   }
 }
+
 
 const filterSlice = createSlice({
   name:'filter',
@@ -33,3 +41,8 @@ export const {
   CHANGE_FILTER_STATUS,
   CHANGE_COLOR_STATUS
 } = filterSlice.actions
+
+export const filterColors = state => state.filter.filterColor
+export const userFilterStatus = state => state.filter.entities.filterStatus
+export const userColorStatus = state => state.filter.entities.filtredColor
+export const optionColor = state => state.filter.filterColor

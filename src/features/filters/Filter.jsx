@@ -1,14 +1,20 @@
 import { Box, Button, Checkbox, Grid, Stack, Typography } from '@mui/material'
-import { useDispatch, useSelector,shallowEqual } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {CHANGE_COLOR_STATUS} from './filterSlice'
-import {MARK_ALL_TODOS, DELETE_ALL_COMPLETE} from '../todos/todoSlice'
+import {CHANGE_COLOR_STATUS,filterColors} from './filterSlice'
+import {MARK_ALL_TODOS, DELETE_ALL_COMPLETE,selectTodos} from '../todos/todoSlice'
 import FilterStatus from '../../common/components/FilterStatus'
+
 
 const Filter = () => {
   const dispatch = useDispatch()
 
-  const filterColor = useSelector(state => state.filter.filterColor)
+  const filterColor = useSelector(state => filterColors(state))
+  const rememingTodo = useSelector( state => {
+    const todos = selectTodos(state)
+    const activeTodos = Object.keys(todos).filter(id => todos[id].complete === false)
+    return activeTodos.length
+  })
 
 
   const handelChangeColor = (e,color) => {
@@ -49,7 +55,7 @@ const Filter = () => {
             variant='h5'>Remining Todos</Typography>
           <Stack mt={2} spacing={2} alignItems='center'>
             <Typography variant='body1' >
-              5 items left
+              {/* {rememingTodo} */}
             </Typography>
           </Stack>
         </Grid>
